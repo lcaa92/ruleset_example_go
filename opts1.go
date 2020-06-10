@@ -3,36 +3,38 @@ package main
 import "fmt"
 
 // Item struct
-type Item struct {
-	name string
-}
+type Item struct{}
 
-// RuleSets struct
-type RuleSets struct {
-	itemA Item
-	itemB Item
+// RuleSet struct
+type RuleSet struct{}
+
+// NewRuleSet return empty RuleSet
+func NewRuleSet() RuleSet {
+	return RuleSet{}
 }
 
 // AddDep return nil
-func (rs RuleSets) AddDep() {
+func (rs RuleSet) AddDep(A Item, B Item) {
 	fmt.Println("AddDep func")
 }
 
 // AddConflict return nil
-func (rs RuleSets) AddConflict() {
+func (rs RuleSet) AddConflict(A Item, B Item) {
 	fmt.Println("AddConflict func")
 }
 
 // IsCoherent return nil
-func (rs RuleSets) IsCoherent() {
+func (rs RuleSet) IsCoherent(A Item, B Item) {
 	fmt.Println("IsCoherent func")
 }
 
 func main() {
 	fmt.Println("Starting ...")
-	rs := RuleSets{}
-	rs.AddDep()
-	rs.AddConflict()
-	rs.IsCoherent()
+	rs := NewRuleSet()
+	itemA := Item{}
+	itemB := Item{}
+	rs.AddDep(itemA, itemB)
+	rs.AddConflict(itemA, itemB)
+	rs.IsCoherent(itemA, itemB)
 	fmt.Println("Done ...")
 }
