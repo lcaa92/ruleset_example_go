@@ -15,13 +15,11 @@ func NewRuleSet() RuleSet {
 
 // AddDep add dep in RuleSet
 func (rs *RuleSet) AddDep(A string, B string) {
-	fmt.Println("AddDep func")
 	rs.Deps = append(rs.Deps, [2]string{A, B})
 }
 
 // AddConflict add conflict in RuleSet
 func (rs *RuleSet) AddConflict(A string, B string) {
-	fmt.Println("AddConflict func")
 	rs.Conflicts = append(rs.Conflicts, [2]string{A, B})
 }
 
@@ -101,7 +99,6 @@ func main() {
 		fmt.Println("RuleSet is not coherent")
 	}
 
-	fmt.Printf("%s", rs)
 	fmt.Println("")
 
 	fmt.Println("Done ...")
