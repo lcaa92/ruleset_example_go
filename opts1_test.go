@@ -10,8 +10,8 @@ func TestOpts(t *testing.T) {
 
 	rs := NewRuleSet()
 	rs.AddDep("A", "B")
-	rs.AddDep("C", "D")
-	rs.AddConflict("D", "F")
+	rs.AddDep("B", "C")
+	rs.AddConflict("A", "C")
 	rs.IsCoherent()
 
 	if rs.IsCoherent() {
