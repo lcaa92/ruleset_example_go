@@ -48,21 +48,18 @@ func (rs *RuleSet) IsCoherent() (isCoherent bool) {
 
 	for i := 0; i < len(rs.Deps); i++ {
 		// Get all item dependencies
-		var dependecy []string
+		var dependencies []string
 		next := false
 		itemDep := rs.Deps[i][0]
 
-		dependecy = append(dependecy, rs.Deps[i][1])
+		dependencies = append(dependencies, rs.Deps[i][1])
 		checkDeps := rs.Deps[i][1]
+
 		for {
 			newDeps, checkNext := getDep(checkDeps, rs.Deps)
-
-			if checkNext == true {
-				checkDeps = newDeps
-				dependecy = append(dependecy, newDeps)
-			} else {
-				next = checkNext
-			}
+			dependencies = append(dependencies, newDeps)
+			checkDeps = newDeps
+			next = checkNext
 
 			if next == false {
 				break
@@ -75,7 +72,7 @@ func (rs *RuleSet) IsCoherent() (isCoherent bool) {
 				continue
 			}
 			conflict := rs.Conflicts[k][1]
-			if inArray(conflict, dependecy) {
+			if inArray(conflict, dependencies) {
 				return false
 			}
 		}
@@ -87,11 +84,15 @@ func (rs *RuleSet) IsCoherent() (isCoherent bool) {
 
 func main() {
 	fmt.Println("Starting ...")
+
+	// Example RuleSet not Coherent
 	rs := NewRuleSet()
 
 	rs.AddDep("A", "B")
 	rs.AddDep("B", "C")
-	rs.AddConflict("A", "C")
+	rs.AddDep("C", "D")
+	rs.AddDep("D", "E")
+	rs.AddConflict("A", "E")
 
 	if rs.IsCoherent() {
 		fmt.Println("RuleSet is coherent")
