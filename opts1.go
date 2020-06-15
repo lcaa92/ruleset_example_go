@@ -117,7 +117,7 @@ func (rs *RuleSet) IsCoherent() (isCoherent bool) {
 func main() {
 	fmt.Println("Starting ...")
 
-	// Example RuleSet not Coherent
+	// Example RuleSet Coherent
 	rs := NewRuleSet()
 
 	rs.AddDep("A", "B")
@@ -132,7 +132,7 @@ func main() {
 		fmt.Println("RuleSet1 is not coherent")
 	}
 
-	// Example RuleSet Coherent
+	// Example RuleSet not Coherent
 	rs2 := NewRuleSet()
 	rs2.AddDep("A", "B")
 	rs2.AddDep("B", "T")
